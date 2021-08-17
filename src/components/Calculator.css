@@ -1,0 +1,19 @@
+.calculator {
+  display: grid;
+  grid-template-rows: repeat(6, 60px);
+  width: 400px;
+}
+
+.calculator-input {
+  text-align: right;
+}
+
+.first-row, .second-row, .third-row, .fourth-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.fifth-row {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+}
