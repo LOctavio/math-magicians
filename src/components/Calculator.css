@@ -8,7 +8,10 @@
   text-align: right;
 }
 
-.first-row, .second-row, .third-row, .fourth-row {
+.first-row,
+.second-row,
+.third-row,
+.fourth-row {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
 }
