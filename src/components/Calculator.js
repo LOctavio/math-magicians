@@ -10,6 +10,7 @@ class Calculator extends React.Component {
       total: null,
       next: null,
       operation: null,
+      operationOutput: null,
     };
     this.addNumber = this.addNumber.bind(this);
     this.addOperation = this.addOperation.bind(this);
@@ -18,19 +19,24 @@ class Calculator extends React.Component {
   addNumber(event) {
     const { next } = calculate(this.state, event.target.textContent);
     this.setState({ next });
+    const { total, operation } = this.state;
+    this.setState({
+      operationOutput: (total && operation && next) ? (total + operation + next) : null,
+    });
   }
 
   addOperation(event) {
     const { total, next, operation } = calculate(this.state, event.target.textContent);
     this.setState({ total, next, operation });
+    this.setState({ operationOutput: (total && operation) ? (total + operation) : null });
   }
 
   render() {
-    const { next, total } = this.state;
+    const { next, total, operationOutput } = this.state;
     const { defaultValue } = this.props;
     return (
       <div className="calculator">
-        <input type="text" className="calculator-input" value={next || total || defaultValue} onChange={this.addNumber || this.addOperation} />
+        <input type="text" className="calculator-input" value={operationOutput || next || total || defaultValue} onChange={this.addNumber || this.addOperation} />
         <div className="first-row">
           <button type="button" onClick={this.addOperation}>AC</button>
           <button type="button" onClick={this.addNumber}>+/-</button>
