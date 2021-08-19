@@ -1,58 +1,78 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import './Calculator.css';
+import calculate from '../logic/calculate';
 
 class Calculator extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {};
+    this.state = {
+      total: null,
+      next: null,
+      operation: null,
+      operationOutput: null,
+    };
+    this.addNumber = this.addNumber.bind(this);
+    this.addOperation = this.addOperation.bind(this);
+  }
+
+  addNumber(event) {
+    const { next } = calculate(this.state, event.target.textContent);
+    this.setState({ next });
+    const { total, operation } = this.state;
+    this.setState({
+      operationOutput: (total && operation && next) ? (total + operation + next) : null,
+    });
+  }
+
+  addOperation(event) {
+    const { total, next, operation } = calculate(this.state, event.target.textContent);
+    this.setState({ total, next, operation });
+    this.setState({ operationOutput: (total && operation) ? (total + operation) : null });
   }
 
   render() {
-    const { total } = this.props;
+    const { next, total, operationOutput } = this.state;
+    const { defaultValue } = this.props;
     return (
       <div className="calculator">
-        <input type="text" className="calculator-input" value={total} />
+        <input type="text" className="calculator-input" value={operationOutput || next || total || defaultValue} onChange={this.addNumber || this.addOperation} />
         <div className="first-row">
-          <button type="button">AC</button>
-          <button type="button">+/-</button>
-          <button type="button">%</button>
-          <button type="button">÷</button>
+          <button type="button" onClick={this.addOperation}>AC</button>
+          <button type="button" onClick={this.addNumber}>+/-</button>
+          <button type="button" onClick={this.addOperation}>%</button>
+          <button type="button" onClick={this.addOperation}>÷</button>
         </div>
         <div className="second-row">
-          <button type="button">7</button>
-          <button type="button">8</button>
-          <button type="button">9</button>
-          <button type="button">x</button>
+          <button type="button" onClick={this.addNumber}>7</button>
+          <button type="button" onClick={this.addNumber}>8</button>
+          <button type="button" onClick={this.addNumber}>9</button>
+          <button type="button" onClick={this.addOperation}>x</button>
         </div>
         <div className="third-row">
-          <button type="button">4</button>
-          <button type="button">5</button>
-          <button type="button">6</button>
-          <button type="button">-</button>
+          <button type="button" onClick={this.addNumber}>4</button>
+          <button type="button" onClick={this.addNumber}>5</button>
+          <button type="button" onClick={this.addNumber}>6</button>
+          <button type="button" onClick={this.addOperation}>-</button>
         </div>
         <div className="fourth-row">
-          <button type="button">1</button>
-          <button type="button">2</button>
-          <button type="button">3</button>
-          <button type="button">+</button>
+          <button type="button" onClick={this.addNumber}>1</button>
+          <button type="button" onClick={this.addNumber}>2</button>
+          <button type="button" onClick={this.addNumber}>3</button>
+          <button type="button" onClick={this.addOperation}>+</button>
         </div>
         <div className="fifth-row">
-          <button type="button">0</button>
-          <button type="button">.</button>
-          <button type="button">=</button>
+          <button type="button" onClick={this.addNumber}>0</button>
+          <button type="button" onClick={this.addNumber}>.</button>
+          <button type="button" onClick={this.addOperation}>=</button>
         </div>
       </div>
     );
   }
 }
 
-Calculator.defaultProps = {
-  total: 0,
-};
-
 Calculator.propTypes = {
-  total: PropTypes.number,
+  defaultValue: PropTypes.string.isRequired,
 };
 
 export default Calculator;
