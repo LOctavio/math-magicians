@@ -2,7 +2,6 @@ import React from 'react';
 
 const Quote = () => (
   <div>
-    <h2>Welcome to our page</h2>
     <p className="quote">
       <span>Mathematics is not about numbers, equations, computations, or algorithms:</span>
       <span> its about understanding.</span>
