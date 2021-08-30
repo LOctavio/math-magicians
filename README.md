@@ -19,6 +19,11 @@ This website includes 3 sub-pages:
 - CSS
 - HTMl
 
+## Live Demo
+
+[Heroku](https://math-magicians-octavio.herokuapp.com/)
+
+[Netlify](https://math-magicians-octavio.netlify.app/)
 
 ## Getting Started
 
