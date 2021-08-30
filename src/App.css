@@ -1,0 +1,37 @@
+.calculator-container {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  padding: 0 30px;
+  background-color: black;
+  color: white;
+}
+
+.links {
+  display: flex;
+  list-style-type: none;
+  line-height: 47.88px;
+}
+
+.links li {
+  padding: 0 20px;
+}
+
+.links li a {
+  color: white;
+  text-decoration: none;
+}
+
+.pages {
+  padding: 30px 30px;
+}
+
+.quote {
+  text-align: center;
+  font-size: 30px;
+  padding: 60px 20px;
+}
